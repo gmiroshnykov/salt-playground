@@ -9,7 +9,8 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "salt-playground.dev"
   config.vm.network :private_network, ip: "10.0.9.2"
   config.vm.synced_folder ".", "/opt/salt-playground", :nfs => true
-  config.vm.synced_folder "salt/state", "/srv/salt", :nfs => true
+  config.vm.synced_folder "salt/state", "/srv/salt"
+  config.vm.synced_folder "salt/pillar", "/srv/pillar"
 
   config.ssh.forward_agent = true
 

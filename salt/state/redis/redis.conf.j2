@@ -1,0 +1,5 @@
+{% set redis = pillar.get('redis', {}) -%}
+{% set options = redis.get('options', {}) -%}
+{% for key, value in options.iteritems() -%}
+{{ key }} {{ value }}
+{% endfor %}
