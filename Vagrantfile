@@ -9,6 +9,7 @@ Vagrant.configure("2") do |config|
   config.vm.hostname = "salt-playground.dev"
   config.vm.network :private_network, ip: "10.0.9.2"
   config.vm.synced_folder ".", "/opt/salt-playground", :nfs => true
+  config.vm.synced_folder "salt/master.d", "/etc/salt/master.d"
   config.vm.synced_folder "salt/state", "/srv/salt"
   config.vm.synced_folder "salt/pillar", "/srv/pillar"
 
@@ -29,7 +30,7 @@ Vagrant.configure("2") do |config|
     v.vmx["numvcpus"] = cpus
   end
 
-  config.vm.provision "shell", inline: "wget -O - http://bootstrap.saltstack.org | sudo sh"
+  config.vm.provision "shell", path: "bootstrap.sh"
 
   if defined? VagrantPlugins::Cachier
     config.cache.auto_detect = true
