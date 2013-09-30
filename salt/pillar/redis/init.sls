@@ -1,4 +1,5 @@
 redis:
+  service: redis
   options:
     daemonize: "yes"
     dir: /var/lib/redis

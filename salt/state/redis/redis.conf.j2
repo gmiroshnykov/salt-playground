@@ -1,5 +1,15 @@
 {% set redis = pillar.get('redis', {}) -%}
-{% set options = redis.get('options', {}) -%}
+{% set defaults = {
+        "daemonize": "yes",
+        "dir": "/var/lib/redis",
+        "pidfile": "/var/run/redis/redis.pid",
+        "loglevel": "notice",
+        "logfile": "/var/log/redis/redis.log",
+        "bind": "0.0.0.0",
+        "port": "6379",
+        "save": "60 1000"
+    } %}
+{% set options = defaults.update(redis.get('options', {})) -%}
 {% for key, value in options.iteritems() -%}
 {{ key }} {{ value }}
 {% endfor %}
